@@ -54,11 +54,13 @@ def call(Map pipeline_param){
                     }
                 }
             }
-        }
 
-        stage('Checkout git'){
-            steps {
-                git branch: pipeline_param.git_branch, poll: false, url: pipeline_param.git_repo_url
+            stage('Checkout git'){
+                steps {
+                    git branch: pipeline_param.git_branch, 
+                    poll: false, 
+                    url: pipeline_param.git_repo_url
+                }
             }
         }
     }
