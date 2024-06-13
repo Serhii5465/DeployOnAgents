@@ -1,0 +1,7 @@
+{
+    "git_repo_url" : "shell_setup_repo:Serhii5465/shell_setup.git",
+    "git_branch" : "cygwin",
+    "stash_includes" : ".*, scripts/backup_env/**/*, scripts/vbox_sync/*",
+    "stash_excludes": "",
+    "command": "robocopy /E /copyall . D:\\system\\applications\\cygwin64\\home\\raisnet"
+}
