@@ -2,7 +2,7 @@ def call(Map pipeline_param){
     def agents_online = [];
     
     pipeline {
-        agent { label 'master' }
+        agent none
         
         options { 
             skipDefaultCheckout() 
