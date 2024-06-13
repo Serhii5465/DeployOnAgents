@@ -1,5 +1,5 @@
 def call(Map pipeline_param){
-    def String [] hosts_online;
+    def String [] agents_online;
     
     pipeline {
         agent { label 'master' }
@@ -46,8 +46,8 @@ def call(Map pipeline_param){
                         if(params.WIN_AGENTS.isEmpty()){
                             error("Select at least one host")
                         } else {
-                            hosts_online = params.WIN_AGENTS.split(',')
-                            for (item in hosts_online) {
+                            agents_online = params.WIN_AGENTS.split(',')
+                            for (item in agents_online) {
                                 CheckAgent(item)
                             }
                         }   
@@ -60,6 +60,19 @@ def call(Map pipeline_param){
                     git branch: pipeline_param.git_branch, 
                     poll: false, 
                     url: pipeline_param.git_repo_url
+
+                    stash includes: pipeline_param.stash_includes, excludes: pipeline_param.stash_excludes, name: 'src'
+                }
+            }
+
+            stage('Deploy'){
+                steps {
+                    script {
+                        agents_online.collectEntries {
+                            ["${item}" : UnstashOnAgent(item)]
+                        }
+                        parallel agents_online
+                    }
                 }
             }
         }
