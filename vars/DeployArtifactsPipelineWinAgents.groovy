@@ -1,5 +1,5 @@
 def call(Map pipeline_param){
-    def String [] agents_online;
+    def agents_online = [];
     
     pipeline {
         agent { label 'master' }
@@ -68,10 +68,13 @@ def call(Map pipeline_param){
             stage('Deploy'){
                 steps {
                     script {
-                        agents_online.collectEntries {
-                            ["${item}" : UnstashOnAgent(item)]
+                        def tasks = [:]
+                        for (item in agents_online){
+                            def label = item
+                            tasks[label] = UnstashOnAgent(label, "")
                         }
-                        parallel agents_online
+
+                        parallel tasks
                     }
                 }
             }
