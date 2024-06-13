@@ -4,7 +4,12 @@ def call(label, command){
             stage('Unstash on ' + label){
                 script{
                     unstash 'src'
-                    // bat returnStatus: true, script: command
+                    if(command){
+                        // bat returnStatus: true, script: command
+                        println command
+                    } else {
+                        DeployPowershellArtifacts(label)
+                    }
                 }
             }
         }
