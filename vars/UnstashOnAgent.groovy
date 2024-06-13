@@ -5,8 +5,7 @@ def call(label, command){
                 script{
                     unstash 'src'
                     if(command){
-                        // bat returnStatus: true, script: command
-                        println command
+                        bat returnStatus: true, script: command
                     } else {
                         DeployPowershellArtifacts(label)
                     }
