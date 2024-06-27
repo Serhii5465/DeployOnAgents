@@ -1,7 +1,0 @@
-{
-    "git_repo_url" : "powershell_cmder_cfg_repo:Serhii5465/powershell_cmder_cfg.git",
-    "git_branch" : "main",
-    "stash_includes" : "",
-    "stash_excludes": "README.md, Jenkinsfile",
-    "command": ""
-}
