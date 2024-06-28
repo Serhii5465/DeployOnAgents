@@ -14,7 +14,7 @@ def call(Map pipeline_param){
             name: 'GROUP_WIN_AGENTS',
             script: groovyScript(fallbackScript: [classpath: [], oldScript: '', sandbox: false, script: ''], 
             script: [classpath: [], oldScript: '', sandbox: false, 
-            script: 'return [\'win-agent-host\', \'win-agent-lan\']'])
+            script: 'return [\'windows_agents\']'])
 
             reactiveChoice choiceType: 'PT_CHECKBOX', filterLength: 1, filterable: false, 
             name: 'WIN_AGENTS', referencedParameters: 'GROUP_WIN_AGENTS', 
@@ -30,11 +30,8 @@ def call(Map pipeline_param){
                 return nodes
             }
 
-            if (GROUP_WIN_AGENTS.equals("win-agent-host")) {
-                return GetNodesByLabel(\'windows_agents-host\')
-            }
-            if (GROUP_WIN_AGENTS.equals("win-agent-lan")) {
-                return GetNodesByLabel(\'windows_agents-lan\')
+            if (GROUP_WIN_AGENTS.equals("windows_agents")) {
+                return GetNodesByLabel(\'windows_agents\')
             }
             '''])
         }
