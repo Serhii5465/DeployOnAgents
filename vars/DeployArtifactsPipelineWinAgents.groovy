@@ -55,7 +55,8 @@ def call(Map pipeline_param){
             stage('Checkout git'){
                 steps {
                     git branch: pipeline_param.git_branch, 
-                    poll: false, 
+                    poll: false,
+                    credentialsId: pipeline_param.git_cred_id,
                     url: pipeline_param.git_repo_url
 
                     stash includes: pipeline_param.stash_includes, excludes: pipeline_param.stash_excludes, name: 'src'
