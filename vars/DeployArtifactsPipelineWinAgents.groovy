@@ -1,7 +1,7 @@
 def call(Map pipeline_param){
     def agents_online = [];
     def platform = pipeline_param.platform
-    def label = (platform == 'win32') ? 'win32_agents_vb' : 'linux_agents_vb'
+    def label = (platform == 'win32') ? 'windows_agents' : 'linux_agents_vb'
 
     pipeline {
         agent none
