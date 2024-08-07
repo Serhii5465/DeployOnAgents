@@ -49,30 +49,30 @@ def call(Map pipeline_param){
                 }
             }
 
-            // stage('Checkout git'){
-            //     steps {
-            //         git branch: pipeline_param.git_branch, 
-            //         poll: false,
-            //         credentialsId: pipeline_param.git_cred_id,
-            //         url: pipeline_param.git_repo_url
+            stage('Checkout git'){
+                steps {
+                    git branch: pipeline_param.git_branch, 
+                    poll: false,
+                    credentialsId: pipeline_param.git_cred_id,
+                    url: pipeline_param.git_repo_url
 
-            //         stash includes: pipeline_param.stash_includes, excludes: pipeline_param.stash_excludes, name: 'src'
-            //     }
-            // }
+                    stash includes: pipeline_param.stash_includes, excludes: pipeline_param.stash_excludes, name: 'src'
+                }
+            }
 
-            // stage('Deploy'){
-            //     steps {
-            //         script {
-            //             def tasks = [:]
-            //             for (item in agents_online){
-            //                 def label = item
-            //                 tasks[label] = UnstashOnAgent(label, pipeline_param.command_deploy, pipeline_param.func_deploy)
-            //             }
+            stage('Deploy'){
+                steps {
+                    script {
+                        def tasks = [:]
+                        for (item in agents_online){
+                            def label = item
+                            tasks[label] = UnstashOnAgent(label, pipeline_param.command_deploy, pipeline_param.func_deploy)
+                        }
 
-            //             parallel tasks
-            //         }
-            //     }
-            // }
+                        parallel tasks
+                    }
+                }
+            }
         }
     }
 }
