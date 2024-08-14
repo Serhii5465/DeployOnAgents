@@ -66,7 +66,7 @@ def call(Map pipeline_param){
                         def tasks = [:]
                         for (item in agents_online){
                             def l = item
-                            tasks[label] = UnstashOnAgent(platform, l, pipeline_param.command_deploy, pipeline_param.func_deploy)
+                            tasks[l] = UnstashOnAgent(platform, l, pipeline_param.command_deploy, pipeline_param.func_deploy)
                         }
 
                         parallel tasks
