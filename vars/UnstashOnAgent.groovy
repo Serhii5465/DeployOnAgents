@@ -13,7 +13,7 @@ def call(platform, label, command_deploy, func_deploy){
                         sh returnStatus: true, script: command_deploy
                     }
 
-                    if(func_deploy){
+                    if (func_deploy && platform == 'win32'){
                         func_deploy(label)
                     }
                 }
